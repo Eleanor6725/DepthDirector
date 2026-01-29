@@ -210,18 +210,15 @@
           <div>
             <!-- 第一行说明文字 (可选，标明左边是什么，右边是什么) -->
             <div class="columns is-centered has-text-centered" style="margin-bottom: 1rem;">
-              <div class="column is-one-half">
+              <div class="column is-one-quarter">
                 <h4 class="title is-5">Camera Trajectory</h4> <!-- 左侧标题 -->
               </div>
-              <div class="column is-one-half">
+              <div class="column is-three-quarters">
                 <h4 class="title is-5">Generated Video</h4> <!-- 右侧标题 -->
               </div>
             </div>
 
-            <!-- Comparison 1 -->
-            <h5 class="title is-6 has-text-centered">Comparison 1</h5>
-            <!-- is-vcentered 让左右两边垂直居中对齐 -->
-            <!-- is-mobile 保证在手机端也是左右排列，如果不加，手机上会变成上下排列 -->
+
             <div class="columns is-vcentered is-centered is-mobile">
               <!-- 左侧：图片 -->
               <div class="column is-one-quarter has-text-centered">
@@ -237,13 +234,11 @@
             
             <hr> <!-- 可选：加一条分割线让排版更清晰 -->
 
-            <!-- Comparison 2 -->
-            <h5 class="title is-6 has-text-centered">Comparison 2</h5>
             <div class="columns is-vcentered is-centered is-mobile">
-              <div class="column is-one-half has-text-centered">
+              <div class="column is-one-quarter has-text-centered">
                 <img src="./static/videos/vis_cam_crop2.jpg" alt="Input 2" style="width: 100%;">
               </div>
-              <div class="column is-one-half has-text-centered">
+              <div class="column is-three-quarters has-text-centered">
                 <video controls muted preload playsinline autoplay loop width="100%">
                   <source src="./static/videos/compare2.mp4" type="video/mp4">
                 </video>
@@ -252,27 +247,17 @@
 
             <hr>
 
-            <!-- ... 请按照上面的格式复制粘贴制作 Comparison 3 到 10 ... -->
-
-            <!-- Comparison 10 -->
-            <h5 class="title is-6 has-text-centered">Comparison 10</h5>
             <div class="columns is-vcentered is-centered is-mobile">
-              <div class="column is-one-half has-text-centered">
+              <div class="column is-one-quarter has-text-centered">
                 <img src="./static/videos/vis_cam_crop3.jpg" alt="Input 10" style="width: 100%;">
               </div>
-              <div class="column is-one-half has-text-centered">
+              <div class="column is-three-quarters has-text-centered">
                 <video controls muted preload playsinline autoplay loop width="100%">
                   <source src="./static/videos/compare3.mp4" type="video/mp4">
                 </video>
               </div>
             </div>
 
-            <!-- 底部的文字说明 (根据需要修改或删除) -->
-            <div class="content has-text-centered" style="margin-top: 2rem;">
-              <p>
-                <b>Note:</b> The images on the left are used as input conditions for the videos generated on the right.
-              </p>
-            </div>
           </div>
 
           </div>
