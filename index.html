@@ -468,45 +468,62 @@
     </div>
   </footer>
 
+  
+
+
 <script>
 $(window).on('load', function() {
-  // 设置一个500毫秒的延迟，等待所有脚本初始化完毕
-  setTimeout(function() {
-    console.log("开始自动初始化..."); // 打开控制台(F12)可以看到这句话，证明代码跑了
+  // 定义一个等待函数，确保每一步都有足够时间渲染
+  function wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
-    // 1. 找到外层菜单(Man/Woman...)的第一个按钮
+  async function autoInit() {
+    console.log("开始自动初始化流程...");
+
+    // 1. 点击外层 Tab (Man)
     var $outerTab = $('.tabs:not(.is-toggle) ul li:first-child a').eq(0);
-    
-    // 2. 找到内层菜单(Depth/Gen3c...)的第一个按钮
-    // 注意：我们只找第一个可见区域内的
-    var $innerTab = $('.tabs.is-toggle ul li:first-child a').eq(0);
-
-    // 3. 按顺序点击
-    // 先点外层，确保容器显示出来
     if ($outerTab.length > 0) {
-        $outerTab[0].click(); // 使用原生 click 方法有时候比 jQuery trigger 更有效
-        console.log("点击了外层: " + $outerTab.text());
+        $outerTab[0].click();
+        console.log("动作: 点击外层 Man");
     }
+    await wait(200); // 等待界面切换
 
-    // 再点内层
+    // 2. 点击内层 Tab (Depth)
+    var $innerTab = $('.tabs.is-toggle ul li:first-child a').eq(0);
     if ($innerTab.length > 0) {
         $innerTab[0].click();
-        console.log("点击了内层: " + $innerTab.text());
+        console.log("动作: 点击内层 Depth");
     }
+    await wait(300); // 等待界面切换
 
-    // 4. 强制刷新一下 Canvas 大小
-    setTimeout(function() {
-        $(window).trigger('resize');
-        console.log("触发了 Resize");
-    }, 200);
+    // 3. 【关键步骤】强制清除错误的 0px 高度
+    // 找到当前显示的视频容器，把 video 的高度重置为 auto
+    // 这样浏览器就能重新根据视频原尺寸计算了
+    var $videos = $('.video-comparison video');
+    $videos.each(function() {
+        if ($(this).css('height') === '0px') {
+            $(this).css('height', 'auto');
+            console.log("修复: 发现并重置了一个 0px 高度的视频");
+        }
+    });
 
-  }, 500); // 延迟 500ms
+    // 4. 再次触发 Resize，让脚本重新计算正确的 Canvas 大小
+    $(window).trigger('resize');
+    console.log("动作: 触发最终 Resize");
+    
+    // 双重保险：再等一下再触发一次，防止视频元数据还没加载完
+    await wait(500);
+    $(window).trigger('resize');
+  }
+
+  // 启动
+  setTimeout(autoInit, 500);
 });
 </script>
 
 
 
-        
 </body>
 
 </html>
