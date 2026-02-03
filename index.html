@@ -467,8 +467,29 @@
       </div>
     </div>
   </footer>
-      
-      
+
+<script>
+  $(document).ready(function() {
+    // 1. 点击 "man"
+    // 选择器逻辑：找到没有 'is-toggle' 类的 tabs (即外层大菜单)，取第一个 li 下的 a 标签
+    var $manTab = $('.tabs:not(.is-toggle) ul li:first-child a').eq(0);
+    $manTab.trigger('click');
+
+    // 2. 点击 "depth"
+    // 选择器逻辑：找到带有 'is-toggle' 类的 tabs (即内层圆角菜单)，取第一个 li 下的 a 标签
+    // .eq(0) 确保只点击第一个场景(man)下的那个 depth，而不会点到 woman/gym 下面的
+    var $depthTab = $('.tabs.is-toggle ul li:first-child a').eq(0);
+    $depthTab.trigger('click');
+
+    // 3. 触发 resize，防止 Canvas 渲染大小为 0
+    setTimeout(function() {
+        $(window).trigger('resize');
+    }, 200);
+  });
+</script>
+
+
+        
 </body>
 
 </html>
