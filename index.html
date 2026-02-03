@@ -139,7 +139,7 @@
         <div class="column is-7">
           <div class="content has-text-justified">
             <p>
-                Camera control has been extensively studied in conditioned video generation; however, performing precisely altering the camera trajectories while faithfully preserving the video content remains a challenging task. The mainstream approach to achieving precise camera control is warping a 3D representation according to the target trajectory. However, such methods fail to fully leverage the 3D priors of video diffusion models (VDMs) and often fall into the Inpainting Trap, resulting in subject inconsistency and degraded generation quality. To address this problem, we propose DepthDirector, a video re-rendering framework with precise camera controllability. By leveraging the depth video from explicit 3D representation as camera-control guidance, our method can faithfully reproduce the dynamic scene of an input video under novel camera trajectories. Specifically, we design a View-Content Dual-Stream Condition mechanism that injects both the source video and the warped depth sequence rendered under the target viewpoint into the pretrained video generation model. This geometric guidance signal enables VDMs to comprehend camera movements and leverage their 3D understanding capabilities, thereby facilitating precise camera control and consistent content generation. Next, we introduce a lightweight LoRA-based video diffusion adapter to train our framework, fully preserving the knowledge priors of VDMs. Additionally, we construct a large-scale multi-camera synchronized dataset named MultiCam-WarpData using Unreal Engine 5, containing 8K videos across 1K dynamic scenes. Extensive experiments show that DepthDirector outperforms existing methods in both camera controllability and visual quality. Our code and dataset will be publicly available.  
+              We propose DepthDirector, a video re-rendering framework designed for precise camera control without sacrificing content consistency. While mainstream approaches to precise camera control often fall into the "Inpainting Trap" leading to degraded generation quality, our key insight lies in empowering VDMs to comprehend camera motion rather than relying on simple inpainting. By leveraging warped depth as camera-control guidance, we unleash the latent 3D priors of VDMs. We design a View-Content Dual-Stream mechanism that injects both the original video and a target-trajectory depth map into a pretrained diffusion model. Furthermore, our framework can be trained using LoRA and a synthetic dataset rendered via Unreal Engine of only 8K videos, greatly saving computational costs.
             </p>
           </div>
         </div>
@@ -167,7 +167,7 @@
       <div class="tabs-widget">
         <div class="tabs is-centered">
           <ul class="is-marginless">
-            <li><a>man</a></li>
+            <li class="is-active"><a>man</a></li>
             <li><a>woman</a></li>
             <li><a>gym</a></li>
             <li><a>girls</a></li>
@@ -182,7 +182,7 @@
             <div class="tabs-widget">
               <div class="tabs is-centered is-toggle is-toggle-rounded is-small">
                 <ul class="is-marginless">
-                  <li><a>depth</a></li>
+                  <li class="is-active"><a>depth</a></li>
                   <li><a>GEN3C</a></li>
                   <li><a>EX4D</a></li>
                   <li><a>TrajectoryCrafter</a></li>
