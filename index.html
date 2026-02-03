@@ -469,24 +469,41 @@
   </footer>
 
 <script>
-  $(document).ready(function() {
-    // 1. 点击 "man"
-    // 选择器逻辑：找到没有 'is-toggle' 类的 tabs (即外层大菜单)，取第一个 li 下的 a 标签
-    var $manTab = $('.tabs:not(.is-toggle) ul li:first-child a').eq(0);
-    $manTab.trigger('click');
+$(window).on('load', function() {
+  // 设置一个500毫秒的延迟，等待所有脚本初始化完毕
+  setTimeout(function() {
+    console.log("开始自动初始化..."); // 打开控制台(F12)可以看到这句话，证明代码跑了
 
-    // 2. 点击 "depth"
-    // 选择器逻辑：找到带有 'is-toggle' 类的 tabs (即内层圆角菜单)，取第一个 li 下的 a 标签
-    // .eq(0) 确保只点击第一个场景(man)下的那个 depth，而不会点到 woman/gym 下面的
-    var $depthTab = $('.tabs.is-toggle ul li:first-child a').eq(0);
-    $depthTab.trigger('click');
+    // 1. 找到外层菜单(Man/Woman...)的第一个按钮
+    var $outerTab = $('.tabs:not(.is-toggle) ul li:first-child a').eq(0);
+    
+    // 2. 找到内层菜单(Depth/Gen3c...)的第一个按钮
+    // 注意：我们只找第一个可见区域内的
+    var $innerTab = $('.tabs.is-toggle ul li:first-child a').eq(0);
 
-    // 3. 触发 resize，防止 Canvas 渲染大小为 0
+    // 3. 按顺序点击
+    // 先点外层，确保容器显示出来
+    if ($outerTab.length > 0) {
+        $outerTab[0].click(); // 使用原生 click 方法有时候比 jQuery trigger 更有效
+        console.log("点击了外层: " + $outerTab.text());
+    }
+
+    // 再点内层
+    if ($innerTab.length > 0) {
+        $innerTab[0].click();
+        console.log("点击了内层: " + $innerTab.text());
+    }
+
+    // 4. 强制刷新一下 Canvas 大小
     setTimeout(function() {
         $(window).trigger('resize');
+        console.log("触发了 Resize");
     }, 200);
-  });
+
+  }, 500); // 延迟 500ms
+});
 </script>
+
 
 
         
